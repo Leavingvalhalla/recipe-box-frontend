@@ -1,12 +1,16 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import RecipeCard from './RecipeCard';
 
 function RecipeList() {
+  const [recipes, setRecipes] = useState([]);
+
   useEffect(() => {
-    fetch('http://127.0.0.1:3000/recipes')
+    fetch('http://localhost:3000/recipes')
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setRecipes(data));
   }, []);
-  return;
+
+  return recipes.map((recipe) => <RecipeCard recipe={recipe} />);
 }
 
 export default RecipeList;
