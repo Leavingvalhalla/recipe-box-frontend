@@ -10,7 +10,9 @@ function RecipeList() {
       .then((data) => setRecipes(data));
   }, []);
 
-  return recipes.map((recipe) => <RecipeCard recipe={recipe} />);
+  return recipes.map((recipe) => (
+    <RecipeCard key={recipe.id} recipe={recipe} />
+  ));
 }
 
 export default RecipeList;
