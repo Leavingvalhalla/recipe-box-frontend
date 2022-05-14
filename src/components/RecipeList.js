@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
 
-function RecipeList() {
+function RecipeList({ user }) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -10,7 +10,7 @@ function RecipeList() {
       .then((data) => setRecipes(data));
   }, []);
   return recipes.map((recipe) => (
-    <RecipeCard key={recipe.id} recipe={recipe} />
+    <RecipeCard key={recipe.id} user={user} recipe={recipe} />
   ));
 }
 

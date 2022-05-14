@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import RecipeList from './components/RecipeList';
 import Login from './components/Login';
@@ -13,12 +14,20 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <SignUp />
-      <NavBar user={user} />
-      <Login onLogin={onLogin} />
-      <RecipeList />
-    </div>
+    <BrowserRouter>
+      <NavBar user={user} onLogin={onLogin} />
+      {user ? (
+        <Routes>
+          <Route path="/" element={<RecipeList user={user} />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/signup" element={<SignUp />} />
+          {/* <Route path="/login" element={<Login onLogin={onLogin} />} /> */}
+        </Routes>
+      )}
+    </BrowserRouter>
   );
 }
 
