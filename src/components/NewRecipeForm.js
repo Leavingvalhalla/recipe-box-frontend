@@ -1,11 +1,12 @@
 import { useState } from 'react';
-function NewRecipeForm() {
+function NewRecipeForm({ onNewRecipe }) {
   const [name, setName] = useState('');
   const [instructions, setInstructions] = useState('');
   const [timeToMake, setTimeToMake] = useState('');
   const [vegetarian, setVegetarian] = useState(false);
 
-  function onSubmit() {
+  function onSubmit(e) {
+    e.preventDefault();
     const new_recipe = {
       name: name,
       instructions: instructions,
@@ -16,9 +17,8 @@ function NewRecipeForm() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(new_recipe),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    });
+    onNewRecipe(new_recipe);
   }
 
   return (
@@ -45,7 +45,7 @@ function NewRecipeForm() {
       <label htmlFor="vegetarian">Vegetarian?</label>
       <input
         type="checkbox"
-        onChange={(vegetarian) => setVegetarian(!vegetarian)}
+        onChange={(e) => setVegetarian(e.target.checked)}
       />
       <button type="submit">Submit</button>
     </form>
