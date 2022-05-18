@@ -8,10 +8,15 @@ function NavBar({ user, onLogin }) {
 
   return (
     <div>
-      <h1>Recipe Box</h1>
+      <Link to="/">
+        <h1>Recipe Box</h1>
+      </Link>
       {user ? (
         <div>
           <button onClick={handleLogout}>Logout</button>
+          <Link to="/userpage">
+            <h2>Go To Saved Recipes</h2>
+          </Link>
           <p>{user && `Hello, ${user.username}!`}</p>
         </div>
       ) : (

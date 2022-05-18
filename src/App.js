@@ -1,10 +1,10 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import RecipeList from './components/RecipeList';
-import Login from './components/Login';
 import SignUp from './components/SignUp';
+import UserPage from './components/UserPage';
 
 function App() {
   const [user, setUser] = useState('');
@@ -13,12 +13,21 @@ function App() {
     setUser(user);
   }
 
+  useEffect(() => {
+    fetch('http://localhost:3000/me').then((res) => {
+      if (res.ok) {
+        res.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <NavBar user={user} onLogin={onLogin} />
       {user ? (
         <Routes>
           <Route path="/" element={<RecipeList user={user} />} />
+          <Route path="/userpage" element={<UserPage user={user} />} />
         </Routes>
       ) : (
         <Routes>

@@ -19,7 +19,7 @@ function SignUp() {
         password_confirmation: passwordConfirmation,
       }),
     })
-      .then((r) => r.json())
+      .then((res) => res.json())
       .then(() => setSignedup(true));
   }
 
