@@ -26,14 +26,21 @@ function RecipeList({ user, userpage }) {
     setRecipes(recipes.filter((recipe) => recipe.id !== recipe_id));
   }
 
+  function handleUnsaveRecipe(recipe_id) {
+    fetch(`http://localhost:3000/user_recipes/${recipe_id}`, {
+      method: 'DELETE',
+    });
+  }
+
   return recipes.map((recipe) => (
     <RecipeCard
       key={recipe.id}
       user={user}
       recipe={recipe}
       userpage={userpage}
-      handleDeleteRecipe={handleDeleteRecipe}
       handleSaveRecipe={handleSaveRecipe}
+      handleUnsaveRecipe={handleUnsaveRecipe}
+      handleDeleteRecipe={handleDeleteRecipe}
     />
   ));
 }
