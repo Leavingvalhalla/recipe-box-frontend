@@ -47,6 +47,7 @@ function NewRecipeForm() {
         type="checkbox"
         onChange={(vegetarian) => setVegetarian(!vegetarian)}
       />
+      <button type="submit">Submit</button>
     </form>
   );
 }
