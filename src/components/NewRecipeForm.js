@@ -12,6 +12,13 @@ function NewRecipeForm() {
       time_to_make: timeToMake,
       vegetarian: vegetarian,
     };
+    fetch('http://localhost:3000/recipes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(new_recipe),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   }
 
   return (
@@ -28,9 +35,7 @@ function NewRecipeForm() {
         id="instructions"
         cols="30"
         rows="10"
-      >
-        Put your recipe here...
-      </textarea>
+      ></textarea>
       <label htmlFor="time_to_make">Time to make (in minutes):</label>
       <input
         type="text"

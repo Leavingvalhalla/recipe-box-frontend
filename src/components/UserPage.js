@@ -9,8 +9,8 @@ function UserPage({ user }) {
     () =>
       fetch(`http://localhost:3000/users/${user.id}/recipes`)
         .then((res) => res.json())
-        .then((data) => console.log(setUserRecipes(data))),
-    [user.id]
+        .then((data) => setUserRecipes(data)),
+    []
   );
 
   return (
