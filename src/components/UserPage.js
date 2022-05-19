@@ -6,13 +6,14 @@ function UserPage({ user }) {
   const [userRecipes, setUserRecipes] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${user.id}/recipes`)
+    fetch(`/users/${user.id}/recipes`)
       .then((res) => res.json())
       .then((data) => setUserRecipes(data));
   }, [user.id]);
 
   function onNewRecipe(new_recipe) {
-    setUserRecipes([...userRecipes, new_recipe]);
+    const recipe_array = [...userRecipes, new_recipe];
+    setUserRecipes(recipe_array);
   }
 
   return (

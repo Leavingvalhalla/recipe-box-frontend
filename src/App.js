@@ -21,9 +21,16 @@ function App() {
     });
   }, []);
 
+  function onLogout() {
+    fetch('/logout', {
+      method: 'DELETE',
+    });
+    setUser('');
+  }
+
   return (
     <BrowserRouter>
-      <NavBar user={user} onLogin={onLogin} />
+      <NavBar user={user} handleLogout={onLogout} onLogin={onLogin} />
       {user ? (
         <Routes>
           <Route path="/" element={<RecipeList user={user} />} />

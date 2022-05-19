@@ -5,29 +5,35 @@ function RecipeList({ user, userpage }) {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/recipes')
-      .then((res) => res.json())
-      .then((data) => setRecipes(data));
-  }, []);
+    if (userpage) {
+      fetch(`/users/${user.id}/recipes`)
+        .then((res) => res.json())
+        .then((data) => setRecipes(data));
+    } else {
+      fetch('/recipes')
+        .then((res) => res.json())
+        .then((data) => setRecipes(data));
+    }
+  }, [user, userpage]);
 
   function handleSaveRecipe(user, recipe) {
-    fetch('http://localhost:3000/save_recipe', {
+    fetch('/save_recipe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: user.id, recipe_id: recipe.id }),
     });
-    setRecipes(...recipes, recipe);
+    setRecipes([...recipes, recipe]);
   }
 
   function handleDeleteRecipe(recipe_id) {
-    fetch(`http://localhost:3000/recipes/${recipe_id}`, {
+    fetch(`/recipes/${recipe_id}`, {
       method: 'DELETE',
     });
     setRecipes(recipes.filter((recipe) => recipe.id !== recipe_id));
   }
 
   function handleUnsaveRecipe(recipe_id) {
-    fetch(`http://localhost:3000/user_recipes/${recipe_id}`, {
+    fetch(`/users/${user.id}/recipes/${recipe_id}`, {
       method: 'DELETE',
     });
   }

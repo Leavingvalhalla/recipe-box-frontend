@@ -1,11 +1,7 @@
 import Login from './Login';
 import { Link } from 'react-router-dom';
 
-function NavBar({ user, onLogin }) {
-  function handleLogout() {
-    return;
-  }
-
+function NavBar({ user, onLogin, handleLogout }) {
   return (
     <div>
       <Link to="/">
@@ -13,7 +9,9 @@ function NavBar({ user, onLogin }) {
       </Link>
       {user ? (
         <div>
-          <button onClick={handleLogout}>Logout</button>
+          <Link to="/">
+            <button onClick={handleLogout}>Logout</button>
+          </Link>
           <Link to="/userpage">
             <h2>Go To Saved Recipes</h2>
           </Link>

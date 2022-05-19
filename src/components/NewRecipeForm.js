@@ -13,12 +13,13 @@ function NewRecipeForm({ onNewRecipe }) {
       time_to_make: timeToMake,
       vegetarian: vegetarian,
     };
-    fetch('http://localhost:3000/recipes', {
+    fetch('/recipes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(new_recipe),
-    });
-    onNewRecipe(new_recipe);
+    })
+      .then((res) => res.json())
+      .then(onNewRecipe(new_recipe));
   }
 
   return (
