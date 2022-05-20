@@ -8,6 +8,7 @@ import UserPage from './components/UserPage';
 
 function App() {
   const [user, setUser] = useState('');
+  const [userpage, setUserpage] = useState(false);
 
   function onLogin(user) {
     setUser(user);
@@ -28,13 +29,31 @@ function App() {
     setUser('');
   }
 
+  function onUserpageClick() {
+    setUserpage(true);
+  }
+
+  function onHomeClick() {
+    setUserpage(false);
+  }
+
   return (
     <BrowserRouter>
-      <NavBar user={user} handleLogout={onLogout} onLogin={onLogin} />
+      <NavBar
+        user={user}
+        handleLogout={onLogout}
+        userpage={userpage}
+        onLogin={onLogin}
+        handleUserpageClick={onUserpageClick}
+        handleHomeClick={onHomeClick}
+      />
       {user ? (
         <Routes>
           <Route path="/" element={<RecipeList user={user} />} />
-          <Route path="/userpage" element={<UserPage user={user} />} />
+          <Route
+            path="/userpage"
+            element={<UserPage userpage={userpage} user={user} />}
+          />
         </Routes>
       ) : (
         <Routes>

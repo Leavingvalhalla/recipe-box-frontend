@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Form, Input, Button } from 'antd';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -25,30 +26,36 @@ function SignUp() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="sign_up_password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label htmlFor="password_confirmation">Confirm Password:</label>
-        <input
-          type="password"
-          id="password_confirmation"
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <Form onFinish={handleSubmit}>
+        <Form.Item label="Username" name="username">
+          <Input
+            className="signup"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item name="password" label="Password">
+          <Input
+            className="signup"
+            type="password"
+            id="sign_up_password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Item>
+        <Form.Item name="password_confirmation" label="Password Confirmation">
+          <Input
+            className="signup"
+            type="password"
+            id="password_confirmation"
+            value={passwordConfirmation}
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+          />
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form>
       <p>{signedUp && 'You did it! Now you can login.'}</p>
     </div>
   );

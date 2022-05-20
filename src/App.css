@@ -50,3 +50,19 @@
   margin: 2%;
   display: inline-block;
 }
+
+.logout-button {
+  float: right;
+}
+
+.greeting {
+  text-align: center;
+}
+
+.login {
+  width: 15%
+}
+
+.signup {
+  width: 15%
+}

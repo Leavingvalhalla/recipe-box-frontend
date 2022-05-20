@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Form, Button, Input } from 'antd';
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('');
@@ -18,21 +19,28 @@ function Login({ onLogin }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Username: </label>
-      <input
-        type="text"
-        id="name"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label htmlFor="password">Password: </label>
-      <input
-        type="password"
-        id="login_password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <Form onFinish={handleSubmit}>
+      <Form.Item name="name" label="Username">
+        <Input
+          className="login"
+          type="text"
+          id="name"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Form.Item>
+      <Form.Item name="password" label="Password">
+        <Input
+          className="login"
+          type="password"
+          id="login_password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Item>
+
+      <Button type="primary" htmlType="submit">
+        Login
+      </Button>
+    </Form>
   );
 }
 

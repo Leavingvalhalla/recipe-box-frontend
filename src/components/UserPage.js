@@ -3,7 +3,7 @@ import { Button, Typography } from 'antd';
 import RecipeList from './RecipeList';
 import NewRecipeForm from './NewRecipeForm';
 
-function UserPage({ user }) {
+function UserPage({ user, userpage }) {
   const { Title } = Typography;
   const [userRecipes, setUserRecipes] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -29,7 +29,7 @@ function UserPage({ user }) {
         {showForm ? 'Hide Form' : 'Add Recipe'}
       </Button>
       {showForm && <NewRecipeForm onNewRecipe={onNewRecipe} />}
-      <RecipeList user={user} recipes={userRecipes} userpage="true" />
+      <RecipeList user={user} recipes={userRecipes} userpage={userpage} />
     </div>
   );
 }
