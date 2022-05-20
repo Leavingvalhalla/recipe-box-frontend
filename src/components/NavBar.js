@@ -1,21 +1,23 @@
 import Login from './Login';
 import { Link } from 'react-router-dom';
+import { Typography } from 'antd';
 
 function NavBar({ user, onLogin, handleLogout }) {
+  const { Title } = Typography;
   return (
     <div>
       <Link to="/">
-        <h1>Recipe Box</h1>
+        <Title>Recipe Box</Title>
       </Link>
       {user ? (
         <div>
           <Link to="/">
             <button onClick={handleLogout}>Logout</button>
           </Link>
+          <Title level={2}>{user && `Hello, ${user.username}!`}</Title>
           <Link to="/userpage">
-            <h2>Go To Saved Recipes</h2>
+            <Title level={3}>Go To Saved Recipes</Title>
           </Link>
-          <p>{user && `Hello, ${user.username}!`}</p>
         </div>
       ) : (
         <div>

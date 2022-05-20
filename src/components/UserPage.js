@@ -14,10 +14,7 @@ function UserPage({ user }) {
   }, [user.id]);
 
   function onNewRecipe(new_recipe) {
-    console.log(userRecipes);
-    const recipe_array = [...userRecipes, new_recipe];
-    setUserRecipes(recipe_array);
-    console.log(recipe_array);
+    setUserRecipes([...userRecipes, new_recipe]);
   }
 
   function onShowFormClick() {
