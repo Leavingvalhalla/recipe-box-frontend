@@ -45,3 +45,8 @@
   width: 5%;
 }
 
+.card {
+  width: 25%;
+  margin: 2%;
+  display: inline-block;
+}

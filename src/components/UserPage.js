@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 import RecipeList from './RecipeList';
 import NewRecipeForm from './NewRecipeForm';
 
 function UserPage({ user }) {
+  const { Title } = Typography;
   const [userRecipes, setUserRecipes] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
@@ -23,7 +24,7 @@ function UserPage({ user }) {
 
   return (
     <div>
-      <h1>User Page</h1>
+      <Title>Your Saved Recipes</Title>
       <Button onClick={onShowFormClick}>
         {showForm ? 'Hide Form' : 'Add Recipe'}
       </Button>
