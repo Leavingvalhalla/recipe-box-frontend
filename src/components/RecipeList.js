@@ -22,7 +22,6 @@ function RecipeList({ user, userpage }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: user.id, recipe_id: recipe.id }),
     });
-    setRecipes([...recipes, recipe]);
   }
 
   function handleDeleteRecipe(recipe_id) {
@@ -36,6 +35,7 @@ function RecipeList({ user, userpage }) {
     fetch(`/users/${user.id}/recipes/${recipe_id}`, {
       method: 'DELETE',
     });
+    setRecipes(recipes.filter((recipe) => recipe.id !== recipe_id));
   }
 
   return recipes.map((recipe) => (
