@@ -8,6 +8,7 @@ function RecipeCard({
   handleUnsaveRecipe,
   handleDeleteRecipe,
   handleSaveRecipe,
+  handleEditRecipe,
 }) {
   const [fullRecipe, setFullRecipe] = useState(false);
 
@@ -24,22 +25,38 @@ function RecipeCard({
         <p>{recipe.instructions.slice(0, 250)}...</p>
       )}
       <Button
+        className="card-button"
         onClick={() => setFullRecipe((fullRecipe) => !fullRecipe)}
-        type="primary"
       >
         {fullRecipe ? 'Hide Recipe' : 'See Full Recipe'}
       </Button>
       {/* if logged in, on the homepage, but not admin */}
       {user && !userpage && user.id !== 1 && (
-        <Button onClick={() => handleSaveRecipe(user, recipe)}>
+        <Button
+          className="card-button"
+          onClick={() => handleSaveRecipe(user, recipe)}
+        >
           Save Recipe
         </Button>
       )}
       {/* if on the user page */}
       {userpage && (
-        <Button onClick={() => handleUnsaveRecipe(recipe.id)}>
-          Unsave Recipe
-        </Button>
+        <>
+          <Button
+            className="card-button"
+            type="primary"
+            onClick={() => handleEditRecipe(recipe)}
+          >
+            Edit Recipe
+          </Button>
+          <Button
+            className="card-button"
+            type="danger"
+            onClick={() => handleUnsaveRecipe(recipe.id)}
+          >
+            Unsave Recipe
+          </Button>
+        </>
       )}
       {/* if admin */}
       {user && user.id === 1 && (

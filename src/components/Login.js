@@ -5,8 +5,7 @@ function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -20,7 +19,11 @@ function Login({ onLogin }) {
 
   return (
     <Form onFinish={handleSubmit}>
-      <Form.Item name="name" label="Username">
+      <Form.Item
+        name="name"
+        label="Username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
+      >
         <Input
           className="login"
           type="text"
@@ -28,7 +31,11 @@ function Login({ onLogin }) {
           onChange={(e) => setUsername(e.target.value)}
         />
       </Form.Item>
-      <Form.Item name="password" label="Password">
+      <Form.Item
+        name="password"
+        label="Password"
+        rules={[{ required: true, message: 'Please input your password!' }]}
+      >
         <Input
           className="login"
           type="password"
@@ -36,10 +43,11 @@ function Login({ onLogin }) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form.Item>
-
-      <Button type="primary" htmlType="submit">
-        Login
-      </Button>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Login
+        </Button>
+      </Form.Item>
     </Form>
   );
 }

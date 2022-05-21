@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import RecipeCard from './RecipeCard';
+import EditRecipe from './EditRecipe';
 
 function RecipeList({ user, userpage }) {
   const [recipes, setRecipes] = useState([]);
+  const [editRecipe, setEditRecipe] = useState(false);
+  const [recipeToEdit, setRecipeToEdit] = useState('');
 
   useEffect(() => {
     if (userpage) {
@@ -38,17 +41,28 @@ function RecipeList({ user, userpage }) {
     setRecipes(recipes.filter((recipe) => recipe.id !== recipe_id));
   }
 
-  return recipes.map((recipe) => (
-    <RecipeCard
-      key={recipe.id}
-      user={user}
-      recipe={recipe}
-      userpage={userpage}
-      handleSaveRecipe={handleSaveRecipe}
-      handleUnsaveRecipe={handleUnsaveRecipe}
-      handleDeleteRecipe={handleDeleteRecipe}
-    />
-  ));
+  function handleEditRecipe(recipe) {
+    setEditRecipe(true);
+    setRecipeToEdit(recipe);
+  }
+
+  return (
+    <div className="recipe-div">
+      {editRecipe && <EditRecipe recipeToEdit={recipeToEdit} />}
+      {recipes.map((recipe) => (
+        <RecipeCard
+          key={recipe.id}
+          user={user}
+          recipe={recipe}
+          userpage={userpage}
+          handleSaveRecipe={handleSaveRecipe}
+          handleUnsaveRecipe={handleUnsaveRecipe}
+          handleDeleteRecipe={handleDeleteRecipe}
+          handleEditRecipe={handleEditRecipe}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default RecipeList;

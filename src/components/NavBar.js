@@ -12,7 +12,7 @@ function NavBar({
 }) {
   const { Title } = Typography;
   return (
-    <div>
+    <div className="navbar-div">
       <Link to="/" onClick={handleHomeClick}>
         <Title>Recipe Box</Title>
       </Link>

@@ -23,7 +23,7 @@ function NewRecipeForm({ onNewRecipe }) {
   }
 
   return (
-    <Form onFinish={onSubmit}>
+    <Form className="navbar-div" onFinish={onSubmit}>
       <Form.Item name="name" label="Name">
         <Input
           className="recipe-name"
