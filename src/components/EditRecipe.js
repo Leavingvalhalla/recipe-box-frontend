@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Form, Checkbox, Input, Button } from 'antd';
 
-function EditRecipe({ recipeToEdit }) {
+function EditRecipe({ recipeToEdit, onEditSubmit }) {
   const [name, setName] = useState('');
   const [instructions, setInstructions] = useState('');
   const [timeToMake, setTimeToMake] = useState('');
   const [vegetarian, setVegetarian] = useState(false);
 
-  function onSubmit() {}
-
-  console.log(recipeToEdit);
+  function handleSubmit() {
+    const recipe = { name, instructions, timeToMake, vegetarian };
+    onEditSubmit(recipeToEdit.id, recipe);
+  }
 
   return (
     <Form
@@ -20,7 +21,7 @@ function EditRecipe({ recipeToEdit }) {
         time_to_make: recipeToEdit.time_to_make,
         vegetarian: recipeToEdit.vegetarian,
       }}
-      onFinish={onSubmit}
+      onFinish={handleSubmit}
     >
       <Form.Item name="name" label="Name">
         <Input

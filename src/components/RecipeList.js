@@ -46,6 +46,17 @@ function RecipeList({ user, userpage }) {
     setRecipeToEdit(recipe);
   }
 
+  function handleEditSubmit(id, new_recipe) {
+    fetch(`/recipes/${id}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(new_recipe),
+    });
+    setRecipes(
+      recipes.map((recipe) => (recipe.id === id ? new_recipe : recipe))
+    );
+  }
+
   return (
     <div className="recipe-div">
       {editRecipe && <EditRecipe recipeToEdit={recipeToEdit} />}
@@ -59,6 +70,7 @@ function RecipeList({ user, userpage }) {
           handleUnsaveRecipe={handleUnsaveRecipe}
           handleDeleteRecipe={handleDeleteRecipe}
           handleEditRecipe={handleEditRecipe}
+          handleEditSubmit={handleEditSubmit}
         />
       ))}
     </div>
