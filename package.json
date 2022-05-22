@@ -1,10 +1,10 @@
 {
   "name": "recipe-box-frontend",
   "version": "0.1.0",
+  "private": true,
   "engines": {
     "node": "16.x"
   },
-  "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
@@ -20,10 +20,9 @@
   "proxy": "http://localhost:3000",
   "scripts": {
     "start": "react-scripts start",
-    "clean": "rm -rf public",
-    "build": "npm install",
-    "deploy": "cp -a build/. public/",
-    "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
