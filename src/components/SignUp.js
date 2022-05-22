@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 
 function SignUp() {
@@ -8,7 +9,6 @@ function SignUp() {
   const [signedUp, setSignedup] = useState(false);
 
   function handleSubmit(e) {
-    e.preventDefault();
     fetch('/signup', {
       method: 'POST',
       headers: {
@@ -25,7 +25,7 @@ function SignUp() {
   }
 
   return (
-    <div>
+    <div className="signup-div">
       <Form onFinish={handleSubmit}>
         <Form.Item label="Username" name="username">
           <Input
@@ -56,7 +56,13 @@ function SignUp() {
           Submit
         </Button>
       </Form>
-      <p>{signedUp && 'You did it! Now you can login.'}</p>
+      {signedUp && (
+        <div>
+          <p>
+            You did it! Now you can <Link to="/">login.</Link>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

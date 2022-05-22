@@ -1,5 +1,5 @@
 import Login from './Login';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Typography, Button } from 'antd';
 
 function NavBar({
@@ -8,15 +8,15 @@ function NavBar({
   handleLogout,
   handleUserpageClick,
   handleHomeClick,
-  userpage,
 }) {
   const { Title } = Typography;
+  const location = useLocation();
   return (
     <div className="navbar-div">
       <Link to="/" onClick={handleHomeClick}>
         <Title>Recipe Box</Title>
       </Link>
-      {user ? (
+      {user && (
         <div>
           <Link to="/">
             <Button className="logout-button" onClick={handleLogout}>
@@ -26,7 +26,7 @@ function NavBar({
           <Title className="greeting" level={2}>
             {user && `Hello, ${user.username}!`}
           </Title>
-          {!userpage && (
+          {location.pathname !== '/userpage' && (
             <div>
               <Link to="/userpage" onClick={handleUserpageClick}>
                 <Title level={3}>Go To Saved Recipes</Title>
@@ -34,7 +34,8 @@ function NavBar({
             </div>
           )}
         </div>
-      ) : (
+      )}
+      {!user && location.pathname !== '/signup' && (
         <div>
           <label htmlFor="Login">Login here!</label>
           <Login id="Login" onLogin={onLogin} />

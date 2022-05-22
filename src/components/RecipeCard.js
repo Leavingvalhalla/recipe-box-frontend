@@ -1,4 +1,5 @@
 import { Button, Card, Popconfirm } from 'antd';
+import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
 function RecipeCard({
@@ -10,6 +11,7 @@ function RecipeCard({
   handleSaveRecipe,
   handleEditRecipe,
 }) {
+  const location = useLocation();
   const [fullRecipe, setFullRecipe] = useState(false);
 
   return (
@@ -31,7 +33,7 @@ function RecipeCard({
         {fullRecipe ? 'Hide Recipe' : 'See Full Recipe'}
       </Button>
       {/* if logged in, on the homepage, but not admin */}
-      {user && !userpage && user.id !== 1 && (
+      {user && location.pathname !== '/userpage' && user.id !== 1 && (
         <Button
           className="card-button"
           onClick={() => handleSaveRecipe(user, recipe)}
@@ -40,7 +42,7 @@ function RecipeCard({
         </Button>
       )}
       {/* if on the user page */}
-      {userpage && (
+      {location.pathname === '/userpage' && (
         <>
           <Button
             className="card-button"

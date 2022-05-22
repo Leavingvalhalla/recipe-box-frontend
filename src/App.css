@@ -2,6 +2,7 @@
 
 .App {
   text-align: center; 
+  background-color: #F9EBC8;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -53,11 +54,19 @@
   background-color: #FEFBE7;
 }
 
-.recipe-div {
+/* .recipe-div {
   background-color: #F9EBC8;
-}
+} */
 
 .card-button {
   margin: .2rem;
   width: 8rem;
+}
+
+/* .signup-div {
+  background-color: #F9EBC8;
+} */
+
+.body {
+  background-color: #F9EBC8;
 }

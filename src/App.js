@@ -38,31 +38,31 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar
-        user={user}
-        handleLogout={onLogout}
-        userpage={userpage}
-        onLogin={onLogin}
-        handleUserpageClick={onUserpageClick}
-        handleHomeClick={onHomeClick}
-      />
-      {user ? (
-        <Routes>
-          <Route path="/" element={<RecipeList user={user} />} />
-          <Route
-            path="/userpage"
-            element={<UserPage userpage={userpage} user={user} />}
-          />
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/" element={<RecipeList />} />
-          <Route path="/signup" element={<SignUp />} />
-          {/* <Route path="/login" element={<Login onLogin={onLogin} />} /> */}
-        </Routes>
-      )}
-    </BrowserRouter>
+    <div className="body">
+      <BrowserRouter>
+        <NavBar
+          user={user}
+          handleLogout={onLogout}
+          onLogin={onLogin}
+          handleUserpageClick={onUserpageClick}
+          handleHomeClick={onHomeClick}
+        />
+        {user ? (
+          <Routes>
+            <Route path="/" element={<RecipeList user={user} />} />
+            <Route
+              path="/userpage"
+              element={<UserPage userpage={userpage} user={user} />}
+            />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<RecipeList />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        )}
+      </BrowserRouter>
+    </div>
   );
 }
 

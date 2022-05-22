@@ -1,26 +1,28 @@
 import { useState } from 'react';
 import { Form, Checkbox, Input, Button } from 'antd';
 
-function EditRecipe({ recipeToEdit, onEditSubmit }) {
-  const [name, setName] = useState('');
-  const [instructions, setInstructions] = useState('');
-  const [timeToMake, setTimeToMake] = useState('');
-  const [vegetarian, setVegetarian] = useState(false);
+function EditRecipe({ recipeToEdit, handleEditSubmit }) {
+  const initialValues = {
+    name: recipeToEdit.name,
+    instructions: recipeToEdit.instructions,
+    time_to_make: recipeToEdit.time_to_make,
+    vegetarian: recipeToEdit.vegetarian,
+  };
+
+  const [name, setName] = useState(initialValues.name);
+  const [instructions, setInstructions] = useState(initialValues.instructions);
+  const [timeToMake, setTimeToMake] = useState(initialValues.time_to_make);
+  const [vegetarian, setVegetarian] = useState(initialValues.vegetarian);
 
   function handleSubmit() {
-    const recipe = { name, instructions, timeToMake, vegetarian };
-    onEditSubmit(recipeToEdit.id, recipe);
+    const recipe = { name, instructions, time_to_make: timeToMake, vegetarian };
+    handleEditSubmit(recipeToEdit.id, recipe);
   }
 
   return (
     <Form
       className="navbar-div"
-      initialValues={{
-        name: recipeToEdit.name,
-        instructions: recipeToEdit.instructions,
-        time_to_make: recipeToEdit.time_to_make,
-        vegetarian: recipeToEdit.vegetarian,
-      }}
+      initialValues={initialValues}
       onFinish={handleSubmit}
     >
       <Form.Item name="name" label="Name">
